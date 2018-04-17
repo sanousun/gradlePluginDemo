@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.shenhui.android.apkUploadPlugin'
+
+uploadInfo {
+    userKey = PGYER_USER_KEY
+    apiKey = PGYER_API_KEY
+    dingTalkAccessToken = DING_TALK_ACCESS_TOKEN
+}
+android {
+    compileSdkVersion 27
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "v${variant.versionName}_${variant.name}.apk"
+        }
+    }
+    defaultConfig {
+        applicationId "com.shenhui.android.gradleplugindemo"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+}
